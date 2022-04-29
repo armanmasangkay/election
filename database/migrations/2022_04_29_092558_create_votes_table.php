@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('precincts', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->string('precinct_id');
-            $table->string('municipality');
+            $table->foreignId("precinct_id")->references('id')->on('precincts');
+            $table->foreignId("candidate_id")->references('id')->on('candidates');
+            $table->integer("vote_count");
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('precincts');
+        Schema::dropIfExists('votes');
     }
 };
