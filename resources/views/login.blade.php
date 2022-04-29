@@ -11,14 +11,21 @@
         </div>
         <div class="card mt-4">
             <div class="card-body">
-                <form action="#">
+                <form action="/login" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control" placeholder="Enter your Username">
+                        <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Enter your Username">
+                        @error('username')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control" placeholder="Enter your Password">
+                        <input type="password" class="form-control" name="password" placeholder="Enter your Password">
                     </div>
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary" type="Submit">Log in</button>
