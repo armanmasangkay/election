@@ -2,8 +2,10 @@
 
 @section('title', 'New Admin')
 
+@include('layout.navbar')
+
 @section('content')
-    @include('layout.navbar')
+   
     <h4 class="text-center my-4">New Account</h4>
     <div class="row justify-content-center">
         <div class="col col-md-6 col-lg-5">
@@ -21,7 +23,7 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Account Name</label>
-                            <input type="text" class="form-control @error('account_name') is-invalid @enderror" name="account_name" value="{{ old('account_name') }}" placeholder="Enter your Username">
+                            <input type="text" class="form-control @error('account_name') is-invalid @enderror" name="account_name" value="{{ old('account_name') }}" placeholder="Enter Account Name">
                             @error('account_name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -31,7 +33,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Enter your Username">
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Enter Username">
                             @error('username')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -41,7 +43,7 @@
         
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter your Password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
                             @error('password')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -51,13 +53,15 @@
 
                         <div class="mb-3">
                             <label class="form-label">Repeat Password</label>
-                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Repeat your Password">
+                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Repeat Password">
                             @error('password_confirmation')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
+
+                        @if(auth()->user()->isSuperAdmin())
                         <div class="mb-3">
                             <label class="form-label">Municipality Assigned</label>
 
@@ -74,7 +78,10 @@
                             </div>
                             @enderror
                         </div>
+                        @endif
 
+
+                        @if(auth()->user()->isSuperAdmin())
                         <div class="mb-3">
                             <label class="form-label">Account Type</label>
 
@@ -91,6 +98,7 @@
                             </div>
                             @enderror
                         </div>
+                        @endif
                         
 
                         <div class="d-grid gap-2">

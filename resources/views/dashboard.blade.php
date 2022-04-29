@@ -2,6 +2,8 @@
 
 @section('title', 'Dashboard')
 
+@include('layout.navbar')
+
 @section('content')
-    @include('layout.navbar')
+    
 @endsection

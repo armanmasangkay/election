@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -52,6 +53,11 @@ class AccountController extends Controller
 
     public function saveNewAccount(Request $request)
     {
+        $request->mergeIfMissing([
+            'municipality' => Auth::user()->municipality,
+            'account_type' => 'PPCRV'
+        ]);
+
         $request->validate([
             'account_name' => ['required'],
             'username' => ['required', 'unique:users,username', 'min:4'],
@@ -72,7 +78,7 @@ class AccountController extends Controller
             'type' => $request->account_type
         ]);
 
-        return redirect('/admin/new')->with([
+        return redirect('/account/new')->with([
             'message'=>'Account created successfully!'
         ]);
 

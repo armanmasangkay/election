@@ -25,6 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/new', [AccountController::class, 'newAccount']);
 
     Route::post('/account/new', [AccountController::class, 'saveNewAccount']);
+
+    Route::get('/change-password', [AuthController::class, 'changePasswordForm']);
+
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
 });
 
 
