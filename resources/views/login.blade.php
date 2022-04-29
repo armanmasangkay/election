@@ -6,7 +6,7 @@
 <div class="row px-2 justify-content-center">
     <div class="col col-md-6 col-lg-4">
         <div class='text-center'>
-            <h1 class="text-center mt-4">Election</h1>
+            <h1 class="text-center mt-4">PPCRV Quick Count</h1>
             <h4 class='text-muted'>Sign in</h4>
         </div>
         <div class="card mt-4">
