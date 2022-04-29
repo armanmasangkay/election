@@ -17,8 +17,11 @@
                 <li><a class="dropdown-item" href="#">New Admin</a></li>
                 <li><a class="dropdown-item" href="#">New PPCRV</a></li>
             </ul>
-          </li>
+          </li>  
         </ul>
+        <div class="d-flex">
+            <a class="nav-link" aria-current="page" href="#" style="color:rgba(0,0,0,.9)">Logout</a>
+        </div>
       </div>
     </div>
   </nav>
