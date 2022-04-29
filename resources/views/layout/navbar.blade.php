@@ -9,15 +9,26 @@
           <li class="nav-item">
             <a class="nav-link {{ request()->is('/') ? 'active' : '' }} " aria-current="page" href="/">Home</a>
           </li>
+          @if(! auth()->user()->isSuperAdmin())
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Encode Result</a>
           </li>
+          @endif
+
           <li class="nav-item">
             <a class="nav-link {{ request()->is('account/new') ? 'active' : '' }}" aria-current="page" href="/account/new">New Account</a>
           </li>
+
+          @if(! auth()->user()->isSuperAdmin())
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts">Precincts</a>
+          </li>  
+          @endif
+
           <li class="nav-item">
             <a class="nav-link {{ request()->is('change-password') ? 'active' : '' }} " aria-current="page" href="/change-password">Change Password</a>
           </li>  
+         
         </ul>
         <div class="d-flex">
             <a class="nav-link px-0" aria-current="page" href="/logout" style="color:#fff">Logout</a>

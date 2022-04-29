@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrecinctController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/change-password', [AuthController::class, 'changePasswordForm']);
 
     Route::post('/change-password', [AuthController::class, 'changePassword']);
+
+    Route::get('/precincts', [PrecinctController::class, 'precincts']);
+
+    Route::post('/precincts/new', [PrecinctController::class, 'newPrecinct']);
 });
 
 
