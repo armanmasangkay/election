@@ -7,28 +7,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
+            <a class="nav-link" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Encode Result</a>
           </li>
-          <li class="nav-item dropdown">
-            <a 
-              class="nav-link dropdown-toggle {{ request()->is('admin/new') || request()->is('ppcrv/new') ? 'active' : ''}}" 
-              href="#" id="navbarDropdown" 
-              role="button" 
-              data-bs-toggle="dropdown" 
-              aria-expanded="false">
-                Register
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/admin/new">New Admin</a></li>
-                <li><a class="dropdown-item" href="/ppcrv/new">New PPCRV</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/account/new">New Account</a>
+    
+          </li>  
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/account/new">Change Password</a>
           </li>  
         </ul>
         <div class="d-flex">
-            <a class="nav-link" aria-current="page" href="#" style="color:rgba(0,0,0,.5)">Logout</a>
+            <a class="nav-link px-0" aria-current="page" href="/logout" style="color:rgba(0,0,0,.5)">Logout</a>
         </div>
       </div>
     </div>

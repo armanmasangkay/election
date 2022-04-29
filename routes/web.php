@@ -16,16 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    Route::get('/admin/new', [AccountController::class, 'newAdmin']);
+    Route::get('/account/new', [AccountController::class, 'newAccount']);
+
+    Route::post('/account/new', [AccountController::class, 'saveNewAccount']);
 });
 
 
