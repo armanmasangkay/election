@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('precincts', function (Blueprint $table) {
+        Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->string('precinct_id');
-            $table->string('municipality');
+            $table->string("name");
+            $table->string("location");
+            $table->string("position");
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('precincts');
+        Schema::dropIfExists('candidates');
     }
 };

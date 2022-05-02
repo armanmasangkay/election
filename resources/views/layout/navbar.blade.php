@@ -11,7 +11,7 @@
           </li>
           @if(! auth()->user()->isSuperAdmin())
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Encode Result</a>
+            <a class="nav-link {{ request()->is('encode/vote') ? 'active' : '' }}" aria-current="page" href="/encode/vote">Encode Result</a>
           </li>
           @endif
 
@@ -24,6 +24,10 @@
             <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts">Precincts</a>
           </li>  
           @endif
+
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('candidate/new') ? 'active' : '' }}" aria-current="page" href="/candidate/new">New Candidate</a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link {{ request()->is('change-password') ? 'active' : '' }} " aria-current="page" href="/change-password">Change Password</a>
