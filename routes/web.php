@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PrecinctController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +51,10 @@ Route::middleware('auth')->group(function () {
         '/precincts/update/{precinct}',
         [PrecinctController::class, 'updatePrecinct']
     );
+    Route::get('/candidate/new', [CandidateController::class, 'index']);
+    Route::post('/candidate/new', [CandidateController::class, 'store']);
+
+    Route::get('/encode/vote', [VoteController::class, 'index']);
 });
 
 
