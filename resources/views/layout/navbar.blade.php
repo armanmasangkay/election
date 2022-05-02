@@ -9,17 +9,31 @@
           <li class="nav-item">
             <a class="nav-link {{ request()->is('/') ? 'active' : '' }} " aria-current="page" href="/">Home</a>
           </li>
-          @if(! auth()->user()->isSuperAdmin())
+          @if(! auth()->user()->isSuperAdmin() && ! auth()->user()->isAdmin())
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Encode Result</a>
           </li>
           @endif
 
+          @if(! auth()->user()->isPpcrv())
           <li class="nav-item">
             <a class="nav-link {{ request()->is('account/new') ? 'active' : '' }}" aria-current="page" href="/account/new">New Account</a>
           </li>
+          @endif
 
-          @if(! auth()->user()->isSuperAdmin())
+          @if(auth()->user()->isAdmin())
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Candidates
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">New</a></li>
+              <li><a class="dropdown-item" href="#">List</a></li>
+            </ul>
+          </li>
+          @endif
+
+          @if(! auth()->user()->isPpcrv())
           <li class="nav-item">
             <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts">Precincts</a>
           </li>  

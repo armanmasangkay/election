@@ -12,12 +12,18 @@
     <div class="d-flex align-items-end">
         <div class="me-2">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control @error('precinct_name') is-invalid @enderror" name="precinct_name" placeholder="Enter Precinct Name">
+            <input 
+            type="text" 
+            class="form-control @error('precinct_name') is-invalid @enderror" 
+            name="precinct_name" 
+            placeholder="Enter Precinct Name">
+
             @error('precinct_name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
+
         </div>
 
         <button type="submit" class="btn btn-primary">Add</button>
@@ -31,12 +37,25 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
         @forelse ($precincts as $precinct)
         <tr>
-            <td>{{ $precinct->name }}</td>
+            <td style="width: 80%">{{ $precinct->name }}</td>
+            <td style="width: 20%">
+                
+                <a href="/precincts/edit/{{ $precinct->id }}">Edit</a>
+
+                <a 
+                href="/precincts/delete/{{ $precinct->id }}" 
+                onclick="return confirm(
+                    'Are you sure you want to delete {{$precinct->name}}?'
+                )">
+                    Delete
+                </a>
+            </td>
         </tr>   
         @empty
         <tr>

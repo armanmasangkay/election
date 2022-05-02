@@ -1,12 +1,14 @@
 @extends('layout.main')
 
-@section('title', 'New Admin')
+@section('title', 'New Account')
 
 @include('layout.navbar')
 
 @section('content')
    
-    <h4 class="text-center my-4">New Account</h4>
+    <h4 class="text-center my-4">
+        New {{ auth()->user()->type === 'Admin' ? 'PPCRV' : 'Admin' }} Account
+    </h4>
     <div class="row justify-content-center">
         <div class="col col-md-6 col-lg-5">
 
@@ -80,8 +82,8 @@
                         </div>
                         @endif
 
-
-                        @if(auth()->user()->isSuperAdmin())
+{{-- 
+                        @if(auth()->user()->isAdmin())
                         <div class="mb-3">
                             <label class="form-label">Account Type</label>
 
@@ -98,7 +100,41 @@
                             </div>
                             @enderror
                         </div>
+                        @endif --}}
+
+
+                        @if(auth()->user()->isAdmin())
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Precinct Assigned to
+                            </label>
+                            <select 
+                            class="form-select
+                                @error('precinct_assignment') 
+                                is-invalid 
+                                @enderror" 
+                            name="precinct_assignment">
+                                <option value="" selected>
+                                    --Select Precinct--
+                                </option>
+                                @foreach ($precincts as $precinct)
+                                <option value="{{ $precinct->id }}" {{ old('precinct_assignment') == $precinct->id ? 'selected' : '' }}>
+                                    {{ $precinct->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            <small class="text-muted">
+                                Required only for PPCRV accounts
+                            </small>
+
+                            @error('precinct_assignment')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
                         @endif
+                       
                         
 
                         <div class="d-grid gap-2">

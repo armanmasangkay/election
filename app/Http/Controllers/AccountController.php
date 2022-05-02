@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PpcrvPrecinct;
+use App\Models\Precinct;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +14,18 @@ class AccountController extends Controller
 {
     public function newAccount()
     {
+
+        $precincts = Precinct::where(
+            'municipality',
+            auth()->user()->municipality
+        )->get();
+
         return view('register-account', [
             'municipalities' => $this->validMuninicipalities(),
-            'accountTypes' => $this->validAccountTypes()
+            'accountTypes' => $this->validAccountTypes(),
+            'precincts' => $precincts
         ]);
-}
+    }
 
     private function validMuninicipalities()
     {                      
@@ -55,7 +64,8 @@ class AccountController extends Controller
     {
         $request->mergeIfMissing([
             'municipality' => Auth::user()->municipality,
-            'account_type' => 'PPCRV'
+            'account_type' => 
+                Auth::user()->type === "superadmin" ? 'Admin' : 'PPCRV'
         ]);
 
         $request->validate([
@@ -67,6 +77,7 @@ class AccountController extends Controller
                 'required',
                 Rule::in($this->validMuninicipalities())
             ],
+            'precinct_assignment' => [Rule::requiredIf(Auth::user()->isAdmin())],
             'account_type' => ['required', Rule::in($this->validAccountTypes())]
         ]);
 
@@ -76,6 +87,11 @@ class AccountController extends Controller
             'password' => Hash::make($request->password),
             'municipality' => $request->municipality,
             'type' => $request->account_type
+        ]);
+
+        PpcrvPrecinct::create([
+            'user_id' => Auth::user()->id,
+            'precinct_id' => $request->precinct_assignment
         ]);
 
         return redirect('/account/new')->with([

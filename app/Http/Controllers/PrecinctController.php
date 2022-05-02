@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Precinct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PrecinctController extends Controller
 {
@@ -30,5 +31,36 @@ class PrecinctController extends Controller
         ]);
 
         return back();
+    }
+
+    public function deletePrecinct($precinctId)
+    {
+        $precinct = Precinct::findOrFail($precinctId);
+        
+        $precinct->delete();
+
+        return back();
+    }
+
+    public function editPrencinct($precinctId)
+    {
+        $precinct = Precinct::findOrFail($precinctId);
+
+        return view('edit-precinct', ['precinct' => $precinct]);
+    }
+
+    public function updatePrecinct(Request $request, $precinctId)
+    {
+        $precinct = Precinct::findOrFail($precinctId);
+
+        $request->validate([
+            'precinct_name' => ['required']
+        ]);
+
+        $precinct->name = Str::upper($request->precinct_name);
+
+        $precinct->save();
+
+        return redirect()->action([PrecinctController::class, 'precincts']);
     }
 }

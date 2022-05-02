@@ -34,6 +34,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/precincts', [PrecinctController::class, 'precincts']);
 
     Route::post('/precincts/new', [PrecinctController::class, 'newPrecinct']);
+
+    Route::get(
+        '/precincts/delete/{precinct}',
+        [PrecinctController::class, 'deletePrecinct']
+    );
+
+    Route::get(
+        '/precincts/edit/{precinct}',
+        [PrecinctController::class, 'editPrencinct']
+    );
+
+    Route::post(
+        '/precincts/update/{precinct}',
+        [PrecinctController::class, 'updatePrecinct']
+    );
 });
 
 
