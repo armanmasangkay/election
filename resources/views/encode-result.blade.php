@@ -228,7 +228,7 @@
     </div>
 
     <div class="d-grid gap-2">
-        <button class="btn btn-primary mt-4 " type="submit">Submit</button>
+        <button class="btn btn-primary mt-4 " type="submit" onclick="return confirm('PLEASE DOUBLE-CHECK VOTES BEFORE SUBMITTING! THIS ACTION CANNOT BE UNDONE!')">Submit</button>
     </div>
 </form>
 @endif
