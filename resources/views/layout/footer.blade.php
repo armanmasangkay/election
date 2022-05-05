@@ -5,6 +5,11 @@
     <p>
         Municipality: {{ auth()->user()->municipality }}
     </p>
+
+    <div class="mt-5">
+        <p>Developed by: SLSU-CCSIT Development Team</p>
+        <p>Arman Masangkay | Benigno Ambus Jr.</p>
+    </div>
 </div>
 
 
