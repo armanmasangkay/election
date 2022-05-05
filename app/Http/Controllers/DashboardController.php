@@ -66,14 +66,23 @@ class DashboardController extends Controller
         return view('new-dashboard', ['localCandidates' => $localCandidatesList, 'nationalCandidates' => $nationalCandidatesList, 'municipality' => ucwords($municipality)]);
     }
 
+    private function validPositions()
+    {
+        return [
+            'mayor',
+            'vice-mayor',
+            'councilor'
+        ];
+    }
+
     public function live($municipality = null, $position = null)
     {
         if(! is_null($municipality)) {
             $this->validateMunicipality($municipality);
         }
-
-        if(is_null($position)) {
-            abort(404);
+        
+        if(is_null($position) || ! in_array($position, $this->validPositions())) {
+            return redirect("/live/$municipality/mayor");
         }
 
         $localCandidatesList = [];

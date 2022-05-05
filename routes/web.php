@@ -25,7 +25,7 @@ Route::get('/test', function() {
 });
 
 Route::get('/count/{municipality}', [DashboardController::class, 'index']);
-Route::get('/live/{municipality}/{position}', [DashboardController::class, 'live']);
+Route::get('/live/{municipality?}/{position?}', [DashboardController::class, 'live']);
 
 Route::middleware('auth')->group(function () {
 
