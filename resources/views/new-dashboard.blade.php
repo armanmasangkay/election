@@ -18,8 +18,10 @@
 @endif
 
 @if(Request::is('count*'))
-<div class="row justify-content-center pt-5">
-    <h1 class="text-center">Municipality of {{ $municipality }}</h1>
+<div class="row justify-content-center pt-5 px-2">
+    <div class="col-12 p-2 border bg-white shadow-sm">
+        <h1 class="text-center">Municipality of {{ $municipality }}</h1>
+    </div>
 </div>
 @endif
 
