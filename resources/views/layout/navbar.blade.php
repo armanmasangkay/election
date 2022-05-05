@@ -7,24 +7,24 @@
       <div class="collapse navbar-collapse py-3 ps-md-5" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item px-1">
-            <a class="nav-link {{ request()->is('/') ? 'active' : '' }} " aria-current="page" href="/">Home</a>
+            <a class="nav-link {{ request()->is('/') ? 'active' : '' }} " aria-current="page" href="/"><i class="fas fa-home me-1"></i> Home</a>
           </li>
           @if(auth()->user()->isPpcrv())
           <li class="nav-item px-1">
-            <a class="nav-link {{ request()->is('encode') ? 'active' : '' }}" aria-current="page" href="/encode">Encode Result</a>
+            <a class="nav-link {{ request()->is('encode') ? 'active' : '' }}" aria-current="page" href="/encode"><i class="fas fa-pencil me-1"></i> Encode Result</a>
           </li>
           @endif
 
           @if(! auth()->user()->isPpcrv())
           <li class="nav-item px-1">
-            <a class="nav-link {{ request()->is('account/new') ? 'active' : '' }}" aria-current="page" href="/account/new">New Account</a>
+            <a class="nav-link {{ request()->is('account/new') ? 'active' : '' }}" aria-current="page" href="/account/new"><i class="fas fa-user-plus me-1"></i> New Account</a>
           </li>
           @endif
 
           @if(auth()->user()->isAdmin())
           <li class="nav-item dropdown px-1">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Candidates
+            <i class="fas fa-user me-1"></i> Candidates
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/candidate/new">New</a></li>
@@ -35,17 +35,17 @@
 
           @if(! auth()->user()->isPpcrv())
           <li class="nav-item px-1">
-            <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts">Precincts</a>
+            <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts"><i class="fas fa-building me-1"></i> Precincts</a>
           </li>  
           @endif
 
           <li class="nav-item px-1">
-            <a class="nav-link {{ request()->is('change-password') ? 'active' : '' }} " aria-current="page" href="/change-password">Change Password</a>
+            <a class="nav-link {{ request()->is('change-password') ? 'active' : '' }} " aria-current="page" href="/change-password"><i class="fas fa-key me-1"></i> Change Password</a>
           </li>  
          
         </ul>
         <div class="d-flex">
-            <a class="nav-link px-1 px-md-0" aria-current="page" href="/logout" style="color:#fff">Logout</a>
+            <a class="nav-link px-1 px-md-0" aria-current="page" href="/logout" style="color:#fff"><i class="fas fa-sign-out me-2"></i>Logout</a>
         </div>
       </div>
     </div>
