@@ -2,7 +2,9 @@
 
 @section('title', 'Dashboard')
 
+@if(!Request::is('count*'))
 @include('layout.navbar')
+@endif
 
 @section('content')
 
@@ -12,6 +14,12 @@
     <div>
       {{ session('message') }}
     </div>
+</div>
+@endif
+
+@if(Request::is('count*'))
+<div class="row justify-content-center pt-5">
+    <h1 class="text-center">Municipality of {{ $municipality }}</h1>
 </div>
 @endif
 

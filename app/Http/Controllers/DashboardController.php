@@ -10,14 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index($municipality = null)
     {
         $localCandidatesList = [];
         $nationalCandidatesList = [];
-        $precinctsList = [];
 
-        $nationalCandidates = Candidate::where('location', '!=', Auth::user()->municipality)->get();
-        $localCandidates = Candidate::where('location', Auth::user()->municipality)
+        $nationalCandidates = Candidate::where('location', '!=', ucwords($municipality) ?? Auth::user()->municipality)->get();
+        $localCandidates = Candidate::where('location', ucwords($municipality) ?? Auth::user()->municipality)
                                     ->orderByDesc('position')
                                     ->get();
 
@@ -30,7 +29,7 @@ class DashboardController extends Controller
         }
 
         foreach($nationalCandidates as $nationalCandidate){
-            $precincts = Precinct::where('municipality', Auth::user()->municipality)->get();
+            $precincts = Precinct::where('municipality', ucwords($municipality) ?? Auth::user()->municipality)->get();
             $vote_count = 0;
 
             foreach($precincts as $precinct){
@@ -48,6 +47,6 @@ class DashboardController extends Controller
         }
 
         // dd($nationalCandidatesList);
-        return view('new-dashboard', ['localCandidates' => $localCandidatesList, 'nationalCandidates' => $nationalCandidatesList]);
+        return view('new-dashboard', ['localCandidates' => $localCandidatesList, 'nationalCandidates' => $nationalCandidatesList, 'municipality' => ucwords($municipality)]);
     }
 }
