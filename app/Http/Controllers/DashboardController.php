@@ -63,8 +63,43 @@ class DashboardController extends Controller
                 'vote_count' => $vote_count
             ]);
         }
-
-        // dd($nationalCandidatesList);
         return view('new-dashboard', ['localCandidates' => $localCandidatesList, 'nationalCandidates' => $nationalCandidatesList, 'municipality' => ucwords($municipality)]);
+    }
+
+    private function validPositions()
+    {
+        return [
+            'mayor',
+            'vice-mayor',
+            'councilor'
+        ];
+    }
+
+    public function live($municipality = null, $position = null)
+    {
+        if(! is_null($municipality)) {
+            $this->validateMunicipality($municipality);
+        }
+        
+        if(is_null($position) || ! in_array($position, $this->validPositions())) {
+            return redirect("/live/$municipality/mayor");
+        }
+
+        $localCandidatesList = [];
+
+        $localCandidates = Candidate::where('location',  $this->getMunicipality($municipality))
+                                    ->where('position', $position)
+                                    ->get();
+        foreach($localCandidates as $localCandidate){
+            array_push($localCandidatesList, [
+                'name' => $localCandidate->name, 
+                'position' => $localCandidate->position,
+                'vote_count' => $localCandidate->votes()->sum('vote_count')
+            ]);
+        }
+        $explodedPosition = $position === 'vice-mayor' ? explode('-', $position) : null;
+        $cleanPosition = $explodedPosition != null ? ucwords($explodedPosition[0]).'-'.ucwords($explodedPosition[0]) : ucwords($position);
+
+        return view('live-count', ['localCandidates' => $localCandidatesList, 'municipality' => $municipality, 'position' => $position, 'cleanPosition' => $cleanPosition]);
     }
 }
