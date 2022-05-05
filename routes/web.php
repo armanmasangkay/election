@@ -21,16 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function() {
-    $request = [
-        'candidate_1',
-        'candidate_2',
-        'candidate_3'
-    ];
-
-    $assocRequest = array_fill_keys($request, ['required', 'numeric']);
-
-    dd($assocRequest);
-   
+    
 });
 
 Route::get('/count/{municipality}', [DashboardController::class, 'index']);
