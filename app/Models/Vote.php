@@ -14,4 +14,14 @@ class Vote extends Model
         'candidate_id',
         'vote_count'
     ];
+
+    public function candidate()
+    {
+        return $this->belongsTo(Candidate::class, 'id', 'candidate_id');
+    }
+
+    public function totalVotes($id)
+    {
+        return $this->where('candidate_id', $id)->sum('vote_count');
+    }
 }

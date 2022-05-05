@@ -44,4 +44,9 @@ class Candidate extends Model
         'Councilor'
     ];
 
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
 }

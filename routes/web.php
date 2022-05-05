@@ -33,6 +33,8 @@ Route::get('/test', function() {
    
 });
 
+Route::get('/count/{municipality}', [DashboardController::class, 'index']);
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->middleware('auth');

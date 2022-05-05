@@ -89,8 +89,10 @@ class AccountController extends Controller
             'type' => $request->account_type
         ]);
 
+        $user = User::where('username', $request->username)->first();
+
         PpcrvPrecinct::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user->id,
             'precinct_id' => $request->precinct_assignment
         ]);
 
