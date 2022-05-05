@@ -7,25 +7,28 @@
 @section('content')
 
 <h4 class="mt-4">Add New Precinct</h4>
-<form action="/precincts/new" method="post">
-    @csrf
-    <div class="d-flex align-items-end">
-        <div class="me-2">
-            <label class="form-label">Name</label>
-            <input 
-            type="text" 
-            class="form-control @error('precinct_name') is-invalid @enderror" 
-            name="precinct_name" 
-            placeholder="Enter Precinct Name">
+<div>
+    <form action="/precincts/new" method="post">
+        @csrf
+        <div class="d-flex align-items-end">
+            <div class="me-2">
+                <label class="form-label">Name</label>
+                <input 
+                type="text" 
+                class="form-control @error('precinct_name') is-invalid @enderror" 
+                name="precinct_name" 
+                placeholder="Enter Precinct Name">
 
-            @error('precinct_name')
-            <div class="invalid-feedback">
-                {{ $message }}
+                @error('precinct_name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
-            @enderror
 
-        </div>
-</form>
+            <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
 
 </form>
 

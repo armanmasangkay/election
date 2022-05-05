@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EncodeResultController;
 use App\Http\Controllers\PrecinctController;
 use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/test', function() {
+    $request = [
+        'candidate_1',
+        'candidate_2',
+        'candidate_3'
+    ];
+
+    $assocRequest = array_fill_keys($request, ['required', 'numeric']);
+
+    dd($assocRequest);
+   
+});
 
 Route::middleware('auth')->group(function () {
 
@@ -51,10 +65,16 @@ Route::middleware('auth')->group(function () {
         '/precincts/update/{precinct}',
         [PrecinctController::class, 'updatePrecinct']
     );
-    Route::get('/candidate/new', [CandidateController::class, 'index']);
+
+    Route::get('/candidates', [CandidateController::class, 'index']);
+    
+    Route::get('/candidate/new', [CandidateController::class, 'addNew']);
+
     Route::post('/candidate/new', [CandidateController::class, 'store']);
 
-    Route::get('/encode/vote', [VoteController::class, 'index']);
+    Route::get('/encode', [EncodeResultController::class, 'index']);
+
+    Route::post('/encode', [EncodeResultController::class, 'storeResult']);
 });
 
 

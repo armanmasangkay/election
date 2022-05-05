@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('precincts', function (Blueprint $table) {
             $table->id();
-            $table->string('precinct_id');
+            $table->string('name');
             $table->string('municipality');
             $table->timestamps();
         });

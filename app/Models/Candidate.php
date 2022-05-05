@@ -14,4 +14,34 @@ class Candidate extends Model
         'location',
         'position'
     ];
+
+    const VALID_LOCATIONS = [
+        'Nationwide',
+        'Region VIII',
+        'Anahawan',
+        'Bontoc',
+        'Hinunangan',
+        'Hinundayan',
+        'Libagon',
+        'Liloan',
+        'Limasawa',
+        'Maasin',
+        'Macrohon',
+        'Malitbog',
+        'Padre Burgos',
+        'Pintuyan',
+        'Saint Bernard',
+        'San Francisco',
+        'San Juan',
+        'San Ricardo',
+        'Silago',
+        'Sogod',
+        'Tomas Oppus'
+    ];
+
+    const POSITIONS = [
+        'Mayor',
+        'Councilor'
+    ];
+
 }

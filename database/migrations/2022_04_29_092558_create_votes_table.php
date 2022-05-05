@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("precinct_id")->references('id')->on('precincts');
             $table->foreignId("candidate_id")->references('id')->on('candidates');
-            $table->integer("vote_count");
+            $table->integer("vote_count")->default(0);
             $table->timestamps();
         });
     }

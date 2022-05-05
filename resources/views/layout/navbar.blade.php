@@ -11,7 +11,7 @@
           </li>
           @if(! auth()->user()->isSuperAdmin() && ! auth()->user()->isAdmin())
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('encode/vote') ? 'active' : '' }}" aria-current="page" href="/encode/vote">Encode Result</a>
+            <a class="nav-link {{ request()->is('encode') ? 'active' : '' }}" aria-current="page" href="/encode">Encode Result</a>
           </li>
           @endif
 
@@ -27,8 +27,8 @@
               Candidates
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">New</a></li>
-              <li><a class="dropdown-item" href="#">List</a></li>
+              <li><a class="dropdown-item" href="/candidate/new">New</a></li>
+              <li><a class="dropdown-item" href="/candidates">List</a></li>
             </ul>
           </li>
           @endif
@@ -38,10 +38,6 @@
             <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts">Precincts</a>
           </li>  
           @endif
-
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('candidate/new') ? 'active' : '' }}" aria-current="page" href="/candidate/new">New Candidate</a>
-          </li>
 
           <li class="nav-item">
             <a class="nav-link {{ request()->is('change-password') ? 'active' : '' }} " aria-current="page" href="/change-password">Change Password</a>
