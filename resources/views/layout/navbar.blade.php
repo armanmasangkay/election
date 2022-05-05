@@ -33,7 +33,7 @@
           </li>
           @endif
 
-          @if(! auth()->user()->isPpcrv())
+          @if(auth()->user()->isAdmin())
           <li class="nav-item px-1">
             <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts"><i class="fas fa-building me-1"></i> Precincts</a>
           </li>  
