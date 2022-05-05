@@ -88,7 +88,9 @@ class DashboardController extends Controller
                 'vote_count' => $localCandidate->votes()->sum('vote_count')
             ]);
         }
+        $explodedPosition = $position === 'vice-mayor' ? explode('-', $position) : null;
+        $cleanPosition = $explodedPosition != null ? ucwords($explodedPosition[0]).'-'.ucwords($explodedPosition[0]) : ucwords($position);
 
-        return view('live-count', ['localCandidates' => $localCandidatesList, 'municipality' => $municipality,'position' => $position]);
+        return view('live-count', ['localCandidates' => $localCandidatesList, 'municipality' => $municipality, 'position' => $position, 'cleanPosition' => $cleanPosition]);
     }
 }

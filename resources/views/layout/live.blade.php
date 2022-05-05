@@ -13,8 +13,11 @@
   <body class="bg-light">
     <div class="container">
         @yield('content')
+
+        <h5 class="text-muted mt-5 text-center"><i class="fas fa-circle-info"></i> The page will be updated every minute.</h5>
     </div>
     <script>
+        let timeInterval = 60000;
         setInterval(function () {
             var position = document.getElementById('position').value;
             console.log(position)
@@ -27,7 +30,7 @@
             else{
                 location.href = "/live/" + document.getElementById('municipality').value + "/mayor"
             }
-        }, 60000);
+        }, timeInterval);
     </script>
   </body>
 </html>
