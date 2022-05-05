@@ -21,16 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function() {
-    $request = [
-        'candidate_1',
-        'candidate_2',
-        'candidate_3'
-    ];
-
-    $assocRequest = array_fill_keys($request, ['required', 'numeric']);
-
-    dd($assocRequest);
-   
+    
 });
 
 Route::get('/count/{municipality}', [DashboardController::class, 'index']);
@@ -54,34 +45,43 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/change-password', [AuthController::class, 'changePassword']);
 
-    Route::get('/precincts', [PrecinctController::class, 'precincts']);
+    Route::middleware('allow:Admin')->group(function () {
 
-    Route::post('/precincts/new', [PrecinctController::class, 'newPrecinct']);
-
-    Route::get(
-        '/precincts/delete/{precinct}',
-        [PrecinctController::class, 'deletePrecinct']
-    );
-
-    Route::get(
-        '/precincts/edit/{precinct}',
-        [PrecinctController::class, 'editPrencinct']
-    );
-
-    Route::post(
-        '/precincts/update/{precinct}',
-        [PrecinctController::class, 'updatePrecinct']
-    );
-
-    Route::get('/candidates', [CandidateController::class, 'index']);
+        Route::get('/candidates', [CandidateController::class, 'index']);
     
-    Route::get('/candidate/new', [CandidateController::class, 'addNew']);
+        Route::get('/candidate/new', [CandidateController::class, 'addNew']);
+    
+        Route::post('/candidate/new', [CandidateController::class, 'store']);
 
-    Route::post('/candidate/new', [CandidateController::class, 'store']);
+        Route::get('/precincts', [PrecinctController::class, 'precincts']);
 
-    Route::get('/encode', [EncodeResultController::class, 'index']);
+        Route::post('/precincts/new', [PrecinctController::class, 'newPrecinct']);
+    
+        Route::get(
+            '/precincts/delete/{precinct}',
+            [PrecinctController::class, 'deletePrecinct']
+        );
+    
+        Route::get(
+            '/precincts/edit/{precinct}',
+            [PrecinctController::class, 'editPrencinct']
+        );
+    
+        Route::post(
+            '/precincts/update/{precinct}',
+            [PrecinctController::class, 'updatePrecinct']
+        );
+    
+    });
 
-    Route::post('/encode', [EncodeResultController::class, 'storeResult']);
+    Route::middleware('allow:PPCRV')->group(function () {
+
+        Route::get('/encode', [EncodeResultController::class, 'index']);
+
+        Route::post('/encode', [EncodeResultController::class, 'storeResult']);
+    });
+
+    
 });
 
 
