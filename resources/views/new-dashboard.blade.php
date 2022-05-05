@@ -48,6 +48,21 @@
                         @endif
                         @endforeach
                         <tr>
+                            <td colspan="2" class="border-bottom bg-dark"><h4 class="text-center text-white mt-1">Vice Mayors</h4></td>
+                        </tr>
+                        <tr>
+                            <th class="px-4">Candidates</th>
+                            <th class="px-4">Vote Counts</th>
+                        </tr>
+                        @foreach($localCandidates as $localCandidate)
+                        @if($localCandidate['position'] === 'Vice-Mayor')
+                            <tr>
+                                <td class="px-4">{{ $localCandidate['name'] }}</td>
+                                <td class="px-4">{{ $localCandidate['vote_count'] }}</td>
+                            </tr>
+                        @endif
+                        @endforeach
+                        <tr>
                             <td colspan="2" class="border-bottom bg-dark"><h4 class="text-center text-white mt-1">Councilors</h4></td>
                         </tr>
                         <tr>
