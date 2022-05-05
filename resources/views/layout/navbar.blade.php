@@ -16,8 +16,15 @@
           @endif
 
           @if(! auth()->user()->isPpcrv())
-          <li class="nav-item px-1">
-            <a class="nav-link {{ request()->is('account/new') ? 'active' : '' }}" aria-current="page" href="/account/new"><i class="fas fa-user-plus me-1"></i> New Account</a>
+          <li class="nav-item dropdown px-1">
+            <a class="nav-link dropdown-toggle  {{ request()->is('account/*') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user me-1"></i> Accounts
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/account/new">New</a></li>
+              <li><a class="dropdown-item" href="/accounts">List</a></li>
+            </ul>
+            {{-- <a class="nav-link {{ request()->is('account/new') ? 'active' : '' }}" aria-current="page" href="/account/new"><i class="fas fa-user me-1"></i>New</a> --}}
           </li>
           @endif
 
@@ -33,7 +40,7 @@
           </li>
           @endif
 
-          @if(! auth()->user()->isPpcrv())
+          @if(auth()->user()->isAdmin())
           <li class="nav-item px-1">
             <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts"><i class="fas fa-building me-1"></i> Precincts</a>
           </li>  

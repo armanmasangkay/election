@@ -41,6 +41,7 @@ class Candidate extends Model
 
     const POSITIONS = [
         'Mayor',
+        'Vice-Mayor',
         'Councilor'
     ];
 

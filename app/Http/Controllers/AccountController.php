@@ -27,6 +27,38 @@ class AccountController extends Controller
         ]);
     }
 
+    public function resetPassword($id) 
+    {
+        $user = User::findOrFail($id);
+
+        $user->password = Hash::make('123456');
+
+        $user->save();
+        
+        return back()->with('message', 'Password reset successful!');
+    }
+
+    public function viewAccounts()
+    {
+        $users = null;
+
+        if(auth()->user()->isAdmin()) {
+
+            $users = User::where('type', 'PPCRV')
+                            ->where('municipality', Auth::user()->municipality)
+                            ->get();
+
+        }elseif(auth()->user()->isSuperAdmin()) {
+
+            $users = User::where('type', 'Admin')->get();
+            
+        }
+
+        return view('accounts', [
+            'users' => $users
+        ]);
+    }
+
     public static function validMuninicipalities()
     {                      
         return [
