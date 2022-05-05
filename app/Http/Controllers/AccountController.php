@@ -21,13 +21,13 @@ class AccountController extends Controller
         )->get();
 
         return view('register-account', [
-            'municipalities' => $this->validMuninicipalities(),
+            'municipalities' => self::validMuninicipalities(),
             'accountTypes' => $this->validAccountTypes(),
             'precincts' => $precincts
         ]);
     }
 
-    private function validMuninicipalities()
+    public static function validMuninicipalities()
     {                      
         return [
             'Anahawan',
@@ -75,7 +75,7 @@ class AccountController extends Controller
             'password_confirmation' => ['required'],
             'municipality' => [
                 'required',
-                Rule::in($this->validMuninicipalities())
+                Rule::in(self::validMuninicipalities())
             ],
             'precinct_assignment' => [Rule::requiredIf(Auth::user()->isAdmin())],
             'account_type' => ['required', Rule::in($this->validAccountTypes())]
@@ -91,11 +91,13 @@ class AccountController extends Controller
 
         $user = User::where('username', $request->username)->first();
 
-        PpcrvPrecinct::create([
-            'user_id' => $user->id,
-            'precinct_id' => $request->precinct_assignment
-        ]);
-
+        if(Auth::user()->type === "Admin") {
+            PpcrvPrecinct::create([
+                'user_id' => $user->id,
+                'precinct_id' => $request->precinct_assignment
+            ]); 
+        }
+     
         return redirect('/account/new')->with([
             'message'=>'Account created successfully!'
         ]);

@@ -10,16 +10,34 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    private function getMunicipality($municipality)
+    {
+        return $municipality === null ? Auth::user()->municipality : ucwords($municipality);
+    }
+
+    private function validateMunicipality($municipality)
+    {
+
+        if(! in_array(ucwords($municipality), AccountController::validMuninicipalities())) {
+            abort(404, '');
+        }
+    }
     public function index($municipality = null)
     {
+        if(! is_null($municipality)) {
+            $this->validateMunicipality($municipality);
+        }
+        
+    
         $localCandidatesList = [];
         $nationalCandidatesList = [];
 
-        $nationalCandidates = Candidate::where('location', '!=', ucwords($municipality) ?? Auth::user()->municipality)->get();
-        $localCandidates = Candidate::where('location', ucwords($municipality) ?? Auth::user()->municipality)
+        $nationalCandidates = Candidate::where('location', '!=', $this->getMunicipality($municipality))->get();
+        $localCandidates = Candidate::where('location',  $this->getMunicipality($municipality))
                                     ->orderByDesc('position')
                                     ->get();
 
+                                  
         foreach($localCandidates as $localCandidate){
             array_push($localCandidatesList, [
                 'name' => $localCandidate->name, 
@@ -29,7 +47,7 @@ class DashboardController extends Controller
         }
 
         foreach($nationalCandidates as $nationalCandidate){
-            $precincts = Precinct::where('municipality', ucwords($municipality) ?? Auth::user()->municipality)->get();
+            $precincts = Precinct::where('municipality',  $this->getMunicipality($municipality))->get();
             $vote_count = 0;
 
             foreach($precincts as $precinct){
