@@ -19,10 +19,10 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'username' => 'superadmin',
+            'username' => 'admin',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'type' => 'superadmin',
-            'municipality' => 'none',
+            'type' => 'admin',
+            'municipality' => 'Sogod',
             'remember_token' => Str::random(10),
         ];
     }
