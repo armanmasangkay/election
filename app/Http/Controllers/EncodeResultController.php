@@ -55,6 +55,9 @@ class EncodeResultController extends Controller
         $mayors = Candidate::where('position', 'Mayor')
                             ->where('location', Auth::user()->municipality)
                             ->get();
+        $vicemayors = Candidate::where('position', 'Vice-Mayor')
+                            ->where('location', Auth::user()->municipality)
+                            ->get();
         $councilors = Candidate::where('position', 'Councilor')
                             ->where('location', Auth::user()->municipality)
                             ->get();
@@ -71,6 +74,7 @@ class EncodeResultController extends Controller
             'hgFirsts' => $hgFirsts,
             'hgSeconds' => $hgSeconds,
             'mayors' => $mayors,
+            'vicemayors' => $vicemayors,
             'councilors' => $councilors
         ]);
     }

@@ -212,6 +212,23 @@
         <div class="col">
             <div class="card mt-4">
                 <div class="card-header">
+                <strong>Vice-Mayors</strong>
+                </div>
+                <div class="card-body">
+                    @forelse ($vicemayors as $vicemayor)
+                        <label for="">{{ $vicemayor->name }}</label>
+                        <input type="number" class="form-control" name="candidate_{{ $vicemayor->id }}" value="0" >
+                        <hr>
+                    @empty
+                        No data found
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card mt-4">
+                <div class="card-header">
                 <strong>Councilors</strong>
                 </div>
                 <div class="card-body">

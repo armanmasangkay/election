@@ -6,6 +6,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EncodeResultController;
 use App\Http\Controllers\PrecinctController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +72,8 @@ Route::middleware('auth')->group(function () {
             '/precincts/update/{precinct}',
             [PrecinctController::class, 'updatePrecinct']
         );
+
+        Route::get('/reports', [ReportController::class, 'index']);
     
     });
 
