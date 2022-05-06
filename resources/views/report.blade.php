@@ -11,13 +11,13 @@
         <div class="border bg-white mt-2">
             <table class="table mb-0">
                 <tbody>
+                    <tr><td colspan="{{ count($precincts) + 1 }}" class="bg-dark"><h4 class="mt-1 text-white text-center">Mayors</h4></td></tr>
                     <tr>
-                        <td class="bg-dark"><h5 class="text-white mt-1">Candidates</h5></td>
+                        <td><h5 class="mt-1">Candidates</h5></td>
                         @foreach($precincts as $precinct)
-                        <td class="bg-dark"><h5 class="text-white mt-1">{{ $precinct->name }}</h5></td>
+                        <td><h5 class="mt-1">{{ $precinct->name }}</h5></td>
                         @endforeach
                     </tr>
-                    <tr><td colspan="{{ count($precincts) + 1 }}"><h5 class="mt-1">Mayors</h5></td></tr>
                     <tr>
                         @foreach($localCandidates as $candidate)
                             @if($candidate['position'] === 'Mayor')
@@ -34,7 +34,13 @@
                             @endif
                         @endforeach
                     </tr>
-                    <tr><td colspan="{{ count($precincts) + 1 }}"><h5 class="mt-1">Vice-Mayors</h5></td></tr>
+                    <tr><td colspan="{{ count($precincts) + 1 }}" class="bg-dark"><h5 class="mt-1 text-white text-center">Vice-Mayors</h5></td></tr>
+                    <tr>
+                        <td><h5 class="mt-1">Candidates</h5></td>
+                        @foreach($precincts as $precinct)
+                        <td><h5 class="mt-1">{{ $precinct->name }}</h5></td>
+                        @endforeach
+                    </tr>
                     <tr>
                         @foreach($localCandidates as $candidate)
                             @if($candidate['position'] === 'Vice-Mayor')
@@ -51,7 +57,13 @@
                             @endif
                         @endforeach
                     </tr>
-                    <tr><td colspan="{{ count($precincts) + 1 }}"><h5 class="mt-1">Councilors</h5></td></tr>
+                    <tr><td colspan="{{ count($precincts) + 1 }}" class="bg-dark"><h5 class="mt-1 text-white text-center">Councilors</h5></td></tr>
+                    <tr>
+                        <td><h5 class="mt-1">Candidates</h5></td>
+                        @foreach($precincts as $precinct)
+                        <td><h5 class="mt-1">{{ $precinct->name }}</h5></td>
+                        @endforeach
+                    </tr>
                     <tr>
                         @foreach($localCandidates as $candidate)
                             @if($candidate['position'] === 'Councilor')
