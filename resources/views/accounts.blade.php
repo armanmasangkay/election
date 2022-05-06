@@ -40,7 +40,7 @@
             </tr>
         @empty
             <tr>
-                <td class='text-center' colspan="2">No candidate to show!</td>
+                <td class='text-center' colspan="4">No candidate to show!</td>
             </tr>
         @endforelse 
     </tbody>
