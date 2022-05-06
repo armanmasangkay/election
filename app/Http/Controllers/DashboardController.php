@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use App\Models\Precinct;
+use App\Models\Visitor;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,8 +76,29 @@ class DashboardController extends Controller
         ];
     }
 
-    public function live($municipality = null, $position = null)
+    private function isUniqueVisitor($ip)
     {
+        return ! is_null(Visitor::where('ip', $ip)->first());
+    }
+
+    private function logVisit($ip)
+    {
+       if(! $this->isUniqueVisitor($ip)) {
+            Visitor::create([
+                'ip' => $ip
+            ]);
+       }
+    }
+
+    private function getNumberOfPageVisits()
+    {
+        return Visitor::count();
+    }
+
+    public function live(Request $request, $municipality = null, $position = null)
+    {
+        $this->logVisit($request->ip());
+
         if(! is_null($municipality)) {
             $this->validateMunicipality($municipality);
         }
@@ -100,6 +122,12 @@ class DashboardController extends Controller
         $explodedPosition = $position === 'vice-mayor' ? explode('-', $position) : null;
         $cleanPosition = $explodedPosition != null ? ucwords($explodedPosition[0]).'-'.ucwords($explodedPosition[0]) : ucwords($position);
 
-        return view('live-count', ['localCandidates' => $localCandidatesList, 'municipality' => $municipality, 'position' => $position, 'cleanPosition' => $cleanPosition]);
+        return view('live-count', [
+            'localCandidates' => $localCandidatesList,
+            'municipality' => $municipality,
+            'position' => $position,
+            'cleanPosition' => $cleanPosition,
+            'page_visits' => $this->getNumberOfPageVisits()
+        ]);
     }
 }
