@@ -6,6 +6,7 @@ use App\Models\Candidate;
 use App\Models\Precinct;
 use App\Models\Visitor;
 use App\Models\Vote;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -81,8 +82,25 @@ class DashboardController extends Controller
         return ! is_null(Visitor::where('ip', $ip)->first());
     }
 
+    private function getNumberOfPageVisits()
+    {
+        return Visitor::count();
+    }
+
+    private function shouldStartLogging()
+    {
+        $startLoggingDateTime = Carbon::create(2022, 5, 9, 17, 0, 0, 'Asia/Singapore');
+        
+        $dateTimeNow = Carbon::now('Asia/Singapore');
+       
+        return $dateTimeNow->greaterThanOrEqualTo($startLoggingDateTime);
+    }
     private function logVisit($ip)
     {
+        if(! $this->shouldStartLogging()) {
+            return;
+        }
+
        if(! $this->isUniqueVisitor($ip)) {
             Visitor::create([
                 'ip' => $ip
@@ -90,10 +108,7 @@ class DashboardController extends Controller
        }
     }
 
-    private function getNumberOfPageVisits()
-    {
-        return Visitor::count();
-    }
+    
 
     public function live(Request $request, $municipality = null, $position = null)
     {

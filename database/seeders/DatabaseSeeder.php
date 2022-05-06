@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\AccountController;
 use App\Models\Candidate;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +21,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(1)->create();
 
         $this->seedCandidates();
+
+        $this->seedAdmins();
     }
 
     private function getDataFromCsv($dataName)
@@ -47,7 +52,24 @@ class DatabaseSeeder extends Seeder
             ]);
         }
     }
-    public function seedCandidates()
+
+    private function seedAdmins()
+    {
+        $municipalities = AccountController::validMuninicipalities();
+
+        foreach($municipalities as $municipality) {
+            User::factory()->create([
+                'name' => "$municipality Admin",
+                'username'=> str_replace(" ","_", strtolower($municipality)) . "_admin",
+                'password' => Hash::make('123456'),
+                'type' => 'Admin',
+                'municipality' => $municipality
+            ]);
+        }
+       
+    }
+
+    private function seedCandidates()
     {
         $this->performSeed('presidents', 'Nationwide', 'President');
         $this->performSeed('vice_presidents', 'Nationwide', 'Vice-President');
