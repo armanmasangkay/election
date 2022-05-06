@@ -50,4 +50,8 @@ class Candidate extends Model
         return $this->hasMany(Vote::class);
     }
 
+    // public function precincts()
+    // {
+    //     return $this->hasMany(Precinct::class);
+    // }
 }

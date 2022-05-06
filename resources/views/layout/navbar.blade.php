@@ -38,12 +38,12 @@
               <li><a class="dropdown-item" href="/candidates">List</a></li>
             </ul>
           </li>
-          @endif
-
-          @if(auth()->user()->isAdmin())
           <li class="nav-item px-1">
             <a class="nav-link {{ request()->is('precincts') ? 'active' : '' }} " aria-current="page" href="/precincts"><i class="fas fa-building me-1"></i> Precincts</a>
           </li>  
+          <li class="nav-item px-1">
+            <a class="nav-link {{ request()->is('reports') ? 'active' : '' }}" aria-current="page" href="/reports"><i class="fas fa-file me-1"></i> Reports</a>
+          </li>
           @endif
 
           <li class="nav-item px-1">
