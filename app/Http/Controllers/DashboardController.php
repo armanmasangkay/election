@@ -108,8 +108,6 @@ class DashboardController extends Controller
        }
     }
 
-    
-
     public function live(Request $request, $municipality = null, $position = null)
     {
         $this->logVisit($request->ip());

@@ -15,7 +15,9 @@
         @yield('content')
 
         <h5 class="text-muted mt-5 text-center"><i class="fas fa-circle-info"></i> The page will be updated every minute.</h5>
+        @if($page_visits > 0)
         <p class="text-center text-muted mt-4"><small>Unique page visits {{ $page_visits }}</small></p>
+        @endif
     </div>
     <script>
         let timeInterval = 60000;
